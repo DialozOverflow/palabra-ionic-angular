@@ -54,7 +54,32 @@ export class JugarPage implements OnInit {
       }
     }else if (arg === true){
       this.mostrarAlerta();
+    }else if (this.play == this.nivel.opc){
+      this.perdistes();
     }
+  }
+  async perdistes() {
+    const alert = await this.alertController.create({
+      header: 'Lo siento',
+      message: 'PERDISTES',
+      buttons: [
+        {
+          text: 'Volver',
+          handler: () => {
+            this.router.navigate(['/']);
+          }
+        },
+        {
+          text: 'Jugar otra vez',
+          handler: () => {
+            window.location.reload();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  
   }
   async mostrarAlerta() {
     const alert = await this.alertController.create({
